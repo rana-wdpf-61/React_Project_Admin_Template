@@ -9,8 +9,6 @@ import Purchase from "./pages/Purchase"
 import ManageSupplier from "./pages/supplier/ManageSupplier"
 import CreacteProduction from "./pages/production/CreacteProduction"
 import ManageProduction from "./pages/production/ManageProduction"
-import CreateSup from "./pages/supplier/CreateSup"
-import UpdateSup from './pages/supplier/UpdateSup';
 
 
 function App() {
@@ -26,8 +24,6 @@ function App() {
               <Route index element={<Index/>}/>
               <Route path="/purchase" element={<Purchase/>} />
               <Route path="/managesupplier" element={<ManageSupplier/>} />
-              <Route path="/createsup"  element={<CreateSup/>}/>
-              <Route path="/update/:id" element={<UpdateSup/>}/>
               <Route path="/createproduction" element={<CreacteProduction/>} />
               <Route path="/manageproduction" element={<ManageProduction/>} />
             </Route>
