@@ -1,6 +1,7 @@
 const Cart = (cartName) => {
     const getCart = () => {
       const cart = JSON.parse(localStorage.getItem(cartName)) || [];
+
       return cart;
     };
   
@@ -32,3 +33,4 @@ const Cart = (cartName) => {
   };
   
 export default Cart
+

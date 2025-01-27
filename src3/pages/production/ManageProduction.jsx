@@ -3,13 +3,12 @@ import axios from 'axios'
 import { NavLink } from 'react-router-dom';
 
 const ManageProduction = () => {
-  const baseUrl="http://localhost/MY_PROJECT_OF_(PMS)/admin/"
     const [production, setProduction]=useState([])
 
     const fetchProduction=()=>{
-        axios.get(baseUrl+"api/production/index2/")
+        axios.get("http://localhost/MY_PROJECT_OF_(PMS)/admin/api/production/index_duplicate/")
         .then((res)=>{
-            console.log("production",res);
+            console.log(res);
             setProduction(res.data.production)
             
         })
@@ -23,24 +22,24 @@ const ManageProduction = () => {
         fetchProduction()
     },[])
 
-    // const deleteData=(id)=>{
-    //     const isConfirm=confirm("Are you sure delete this data")
-    //     if(isConfirm){
-    //         axios.get("http://localhost/admin/api/production/delete/" + id)
-    //         .then(res => {
-    //           console.log(res);
-    //           fetchSupplier()
-    //         })
-    //         .catch(err => {
-    //           console.log(err);
+    const deleteData=(id)=>{
+        const isConfirm=confirm("Are you sure delete this data")
+        if(isConfirm){
+            axios.get("http://localhost/MY_PROJECT_OF_(PMS)/admin/api/production/delete/" + id)
+            .then(res => {
+              console.log(res);
+              fetchSupplier()
+            })
+            .catch(err => {
+              console.log(err);
       
-    //         })
-    //     }else{
-    //         console.log("Delete operation canceled");
+            })
+        }else{
+            console.log("Delete operation canceled");
             
-    //     }
+        }
       
-    // }
+    }
 
     return (
         <>
@@ -118,7 +117,8 @@ const ManageProduction = () => {
                                 <td>{data.status}</td>
                                 <td>{data.production_date}</td>
                                 <td className='btn-group'>
-                                    <NavLink to={`show/${data.id}`} className="btn btn-info">Show Details</NavLink>  
+                                    <NavLink to={`show/${data.id}`} className="btn btn-info">Show Details</NavLink>
+                                   
                                 </td>
                             </tr>
                             )

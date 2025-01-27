@@ -3,11 +3,10 @@ import axios from 'axios'
 import { NavLink } from 'react-router-dom';
 
 const ManageSupplier = () => {
-  const baseUrl="http://localhost/MY_PROJECT_OF_(PMS)/admin/"
     const [supplier, setSupplier]=useState([])
 
     const fetchSupplier=()=>{
-        axios.get(baseUrl+"api/supplier/")
+        axios.get("http://localhost/admin/api/supplier/")
         .then((res)=>{
             console.log(res);
             setSupplier(res.data.supplier)
@@ -26,7 +25,7 @@ const ManageSupplier = () => {
     const deleteData=(id)=>{
         const isConfirm=confirm("Are you sure delete this data")
         if(isConfirm){
-            axios.get(baseUrl+"api/supplier/delete/" + id)
+            axios.get("http://localhost/admin/api/supplier/delete/" + id)
             .then(res => {
               console.log(res);
               fetchSupplier()
@@ -110,7 +109,7 @@ const ManageSupplier = () => {
                             return(
                             <tr key={i}>
                                 <td>{data.id}</td>
-                                <td>{data.photo && (<img src={baseUrl+"img/supplier/"+data.photo} alt="" height={50} width={50} />) }</td>
+                                <td>{data.photo && (<img src={"http://localhost/admin/img/supplier/"+data.photo} alt="" height={50} width={50} />) }</td>
                                 <td>{data.name}</td>
                                 <td>{data.phone}</td>
                                 <td>{data.email}</td>

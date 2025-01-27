@@ -17,12 +17,12 @@ const Sidebar = () => {
   </div>
   {/*navigation*/}
   <ul className="metismenu" id="menu">
-    <li> 
-    <NavLink to="/dashboard"> 
+    <li>
+      <a href="javascript:;" className="has-arroww">
         <div className="parent-icon"><i className="bi bi-house-fill" />
         </div>
         <div className="menu-title">Dashboard</div>
-        </NavLink>
+      </a>
     </li>
     <li>
       <a href="javascript:;" className="has-arrow">
@@ -109,58 +109,7 @@ const Sidebar = () => {
         </li>
       </ul>
     </li>
-    <li>
-      <a href="javascript:;" className="has-arrow">
-        <div className="parent-icon"><i className="bi bi-basket2-fill" />
-        </div>
-        <div className="menu-title">Stock</div>
-      </a>
-      <ul>
-        <li> <NavLink to="/managestock"><i className="bi bi-circle" />Stock Product</NavLink> 
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="javascript:;" className="has-arrow">
-        <div className="parent-icon"><i className="bi bi-basket2-fill" />
-        </div>
-        <div className="menu-title">Expense</div>
-      </a>
-      <ul>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Expense</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="javascript:;" className="has-arrow">
-        <div className="parent-icon"><i className="bi bi-basket2-fill" />
-        </div>
-        <div className="menu-title">Report</div>
-      </a>
-      <ul>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Production Report</a>
-        </li>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Purchases Report</a>
-        </li>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Sales Report</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="javascript:;" className="has-arrow">
-        <div className="parent-icon"><i className="bi bi-basket2-fill" />
-        </div>
-        <div className="menu-title">Admin Panel</div>
-      </a>
-      <ul>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Admin Profile</a>
-        </li>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Setting</a>
-        </li>
-        <li> <a href="ecommerce-products-list.html"><i className="bi bi-circle" />Log Out</a>
-        </li>
-      </ul>
-    </li>
+  
 
   </ul>
   {/*end navigation*/}

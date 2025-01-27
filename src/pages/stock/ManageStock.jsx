@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { NavLink } from 'react-router-dom';
+const ManageStock = () => {
+    const baseUrl="http://localhost/MY_PROJECT_OF_(PMS)/admin/"
+    const [sctock, setsctock]=useState([])
 
-const ManageSupplier = () => {
-  const baseUrl="http://localhost/MY_PROJECT_OF_(PMS)/admin/"
-    const [supplier, setSupplier]=useState([])
-
-    const fetchSupplier=()=>{
-        axios.get(baseUrl+"api/supplier/")
+    const fetchsctock=()=>{
+        axios.get(baseUrl+"api/stock/index_join_query/")
         .then((res)=>{
             console.log(res);
-            setSupplier(res.data.supplier)
+            setsctock(res.data.stock)
             
         })
         .catch((err)=>{
@@ -20,16 +19,16 @@ const ManageSupplier = () => {
     }
 
     useEffect(()=>{
-        fetchSupplier()
+        fetchsctock()
     },[])
 
     const deleteData=(id)=>{
         const isConfirm=confirm("Are you sure delete this data")
         if(isConfirm){
-            axios.get(baseUrl+"api/supplier/delete/" + id)
+            axios.get(baseUrl+"api/stock/delete/" + id)
             .then(res => {
               console.log(res);
-              fetchSupplier()
+              fetchsctock()
             })
             .catch(err => {
               console.log(err);
@@ -42,24 +41,24 @@ const ManageSupplier = () => {
       
     }
 
-    return (
-        <>
+  return (
+    <>
 <main className="container">
   {/*breadcrumb*/}
   <div className="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div className="breadcrumb-title pe-3">SUPPLIER PURCHASES</div>
+    <div className="breadcrumb-title pe-3">STOCK DETAILS</div>
     <div className="ps-3">
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb mb-0 p-0">
           <li className="breadcrumb-item"><a href="<?php echo $base_url?>/home/index"><i className="bx bx-home-alt" /></a>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">Supplier Details</li>
+          <li className="breadcrumb-item active" aria-current="page">sctock Details</li>
         </ol>
       </nav>
     </div>
     <div className="ms-auto">
       <div className="btn-group">
-        <NavLink to='/createsup'  className="btn btn-primary">Add Suppliers<i className="bi bi-plus-circle"/></NavLink>
+        <NavLink to='/createsup'  className="btn btn-primary">Add sctocks<i className="bi bi-plus-circle"/></NavLink>
       </div>
     </div>
   </div>
@@ -96,25 +95,23 @@ const ManageSupplier = () => {
                     <thead className='table-primary'>
                         <tr>
                             <th>Id</th>
-                            <th>Photo</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit of Mesure</th>
+                            <th>Warehouse</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                        {
-                        supplier?.map((data, i)=>{
+                        sctock?.map((data, i)=>{
                             return(
                             <tr key={i}>
                                 <td>{data.id}</td>
-                                <td>{data.photo && (<img src={baseUrl+"img/supplier/"+data.photo} alt="" height={50} width={50} />) }</td>
-                                <td>{data.name}</td>
-                                <td>{data.phone}</td>
-                                <td>{data.email}</td>
-                                <td>{data.address}</td>
+                                <td>{data.product}</td>
+                                <td>{data.qty}</td>
+                                <td>{data.uom}</td>
+                                <td>{data.warehouse}</td>
                                 <td className='btn-group'>
                                     <NavLink to={`show/${data.id}`} className="btn btn-info">Show</NavLink>
                                     <NavLink to={`update/${data.id}`} className="btn btn-primary">Edit</NavLink>
@@ -128,8 +125,9 @@ const ManageSupplier = () => {
                 </table>
   </div>
 </main>
-        </>
-    );
-};
 
-export default ManageSupplier;
+    </>
+  )
+}
+
+export default ManageStock

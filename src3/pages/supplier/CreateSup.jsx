@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 
 const CreateSup = () => {
-const baseUrl="http://localhost/MY_PROJECT_OF_(PMS)/admin/"
+const baseUrl="http://localhost/admin/"
 const navigation=useNavigate()
     const [supplier, setSupplier]=useState({
         name:"",

@@ -11,8 +11,6 @@ import CreacteProduction from "./pages/production/CreacteProduction"
 import ManageProduction from "./pages/production/ManageProduction"
 import CreateSup from "./pages/supplier/CreateSup"
 import UpdateSup from './pages/supplier/UpdateSup';
-import ManageStock from "./pages/stock/ManageStock"
-import Dashboard from "./pages/Dashboard"
 
 
 function App() {
@@ -32,8 +30,6 @@ function App() {
               <Route path="/update/:id" element={<UpdateSup/>}/>
               <Route path="/createproduction" element={<CreacteProduction/>} />
               <Route path="/manageproduction" element={<ManageProduction/>} />
-              <Route path="/managestock" element={<ManageStock/>} />
-              <Route path="/dashboard" element={<Dashboard/>}/> 
             </Route>
           </Routes>
         <RightSideber/>

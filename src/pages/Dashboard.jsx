@@ -1,10 +1,9 @@
 import React from 'react'
 
-
-const Index = () => {
+const Dashboard = () => {
   return (
     <>
-  <main className="page-content">
+    <main className="page-content">
   <div className="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
     <div className="col">
       <div className="card rounded-4">
@@ -643,9 +642,8 @@ const Index = () => {
     </div>
   </div>{/*end row*/}
 </main>
-
     </>
   )
 }
 
-export default Index
+export default Dashboard
