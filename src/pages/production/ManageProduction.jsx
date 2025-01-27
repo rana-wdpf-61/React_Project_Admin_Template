@@ -6,7 +6,7 @@ const ManageProduction = () => {
     const [production, setProduction]=useState([])
 
     const fetchProduction=()=>{
-        axios.get("http://localhost/admin/api/production/")
+        axios.get("http://localhost/MY_PROJECT_OF_(PMS)/admin/api/production/index_duplicate/")
         .then((res)=>{
             console.log(res);
             setProduction(res.data.production)
@@ -25,7 +25,7 @@ const ManageProduction = () => {
     const deleteData=(id)=>{
         const isConfirm=confirm("Are you sure delete this data")
         if(isConfirm){
-            axios.get("http://localhost/admin/api/production/delete/" + id)
+            axios.get("http://localhost/MY_PROJECT_OF_(PMS)/admin/api/production/delete/" + id)
             .then(res => {
               console.log(res);
               fetchSupplier()
@@ -110,11 +110,11 @@ const ManageProduction = () => {
                             return(
                             <tr key={i}>
                                 <td>{data.id}</td>
-                                <td>{data.product_id}</td>
+                                <td>{data.product}</td>
                                 <td>{data.qty}</td>
-                                <td>{data.uom_id}</td>
+                                <td>{data.uom}</td>
                                 <td>{data.total_cost}</td>
-                                <td>{data.status_id}</td>
+                                <td>{data.status}</td>
                                 <td>{data.production_date}</td>
                                 <td className='btn-group'>
                                     <NavLink to={`show/${data.id}`} className="btn btn-info">Show Details</NavLink>

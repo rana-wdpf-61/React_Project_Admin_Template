@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const CreacteProduction = () => {
-    const baseUrl="http://localhost/admin/"
+    const baseUrl="http://localhost/MY_PROJECT_OF_(PMS)/admin/"
     const cart = Cart('production');
     const [product, setProduct]=useState([])
     const [selectProduct, setSelectProduct]=useState(null)
@@ -18,14 +18,22 @@ const CreacteProduction = () => {
         total:0
    })
 
-   const [productionProcess, setProductionProcess]=useState({
-      product_id:0,
-      uom_id:0,
-      products:[],
-      qty:0,
-      production_date:0,
-      total_cost:0
-   })
+  //  const [productionProcess, setProductionProcess]=useState({
+  //     product_id:0,
+  //     uom_id:0,
+  //     products:[],
+  //     quantity:0,
+  //     production_date:0,
+  //     total_cost:0
+  //  })
+
+  const [productionProcess, setProductionProcess] = useState({
+    product_id: 0,
+    uom_id: 0,
+    qty: 0,
+    production_date: "",
+    total_cost: 0,
+  });
     
    const [item, setItem] = useState({
     product_name:"",
@@ -76,7 +84,7 @@ const CreacteProduction = () => {
     
   const handleSetAllItems = (e) => {
     // alert()
-    // console.log(item);
+     console.log(item);
     cart.save(item)
      setItems(cart.getCart())
      setItem({
@@ -116,11 +124,14 @@ useEffect(() => {
     cart.deleteItem(id)
     setItems(cart.getCart())
  }
+
+
  const handleDeleteAllItems=()=>{
     cart.clearCart()
     setItems(cart.getCart())
  }
 
+ 
     const handleChangeProduct=(e)=>{
         const {value}=e.target 
         setSelectProduct(JSON.parse(value))
@@ -170,31 +181,63 @@ useEffect(() => {
       })
     }
 
-    const handleProcess=()=>{
-      setProductionProcess({
-        product_id:selectProduct.id,
-        uom_id:item.uom_id,
-        products:items,
-        qty:productionProcess.qty,
-        production_date:productionProcess.production_date,
-        total_cost:summaryCount.total
-      })
+    // const handleProcess=()=>{
+    //   setProductionProcess({
+    //     product_id:selectProduct.id,
+    //     uom_id:item.uom_id,
+    //     products:items,
+    //     quantity:productionProcess.qty,
+    //     production_date:productionProcess.production_date,
+    //     total_cost:summaryCount.total
 
-      axios.post(baseUrl+"api/Production/react_process/", productionProcess)
-      .then((res)=>{
-        console.log(res);
-        cart.clearCart()
-        setItems(cart.getCart())
-        setSelectProduct(null)
-        setUom([]);
-      })
-      .catch((err)=>{
-        console.log(err);
-        
-          
-        
-      })
-    }
+    //   })
+      
+    //   axios.post(baseUrl+"api/Production/react_process", productionProcess)
+    //   .then((res)=>{
+    //       console.log(res.data);
+    //       cart.clearCart()
+    //       setItems(cart.getCart())
+    //       setSelectProduct(null)
+    //       setUom([]);
+    //     })
+    //     .catch((err)=>{
+    //         console.log(err);
+    //       })
+    //     }
+
+
+
+const handleProcess = () => {
+  if (!selectProduct || !summaryCount.total) {
+    console.error("Product or Total Amount is missing.");
+    return;
+  }
+
+  const updatedProductionProcess = {
+    product_id: selectProduct.id, // Ensure selectProduct is valid
+    uom_id: items.uom_id || 0, // Use selectedUom or default to 0
+    qty: parseFloat(productionProcess.qty) || 0,
+    production_date: productionProcess.production_date || new Date().toISOString().split("T")[0], // Default to today's date
+    total_cost: parseFloat(summaryCount.total) || 0,
+  };
+
+  setProductionProcess(updatedProductionProcess);
+
+  axios
+    .post(`${baseUrl}api/Production/react_process`, updatedProductionProcess)
+    .then((res) => {
+      console.log("Process Successful:", res.data);
+      // Clear data after successful submission
+      setItems(cart.getCart()); // Assuming this clears the items
+      setSelectProduct(null);
+      setUom([]);
+    })
+    .catch((err) => {
+      console.error("Error in Processing:", err);
+    });
+};
+
+
 
 
     useEffect(()=>{
@@ -255,11 +298,11 @@ useEffect(() => {
             </div>
             <div className="col-md-4">
               <h5>Product Quantity :</h5>
-              <input name='qty' type="number" className="form-control" placeholder="Qty" />
+              <input value={productionProcess.qty} name='qty' type="number" className="form-control" placeholder="Qty" />
             </div>
             <div className="col-md-4">
               <h5>Production Date :</h5>
-              <input name='production_date' type="date"  className="form-control mt-1" />
+              <input value={productionProcess.production_date} name='production_date' type="date"  className="form-control mt-1" />
             </div>
           </div>
           {/* Product Table */}
@@ -288,7 +331,7 @@ useEffect(() => {
                     }
                   </select>
                 </td>
-                <td><input value={item.qty} name='qty' onChange={handleChangeRowProduct} type="number" className="form-control" placeholder="Qty" /></td>
+                <td><input value={item.qty } name='qty' onChange={ handleChangeRowProduct} type="number" className="form-control" placeholder="Qty" /></td>
                 <td> 
                 <select onChange={handleChangeRowProduct} className="form-select" name='uom'>
                     <option>Select UOM</option>
@@ -359,3 +402,4 @@ useEffect(() => {
 };
 
 export default CreacteProduction;
+
